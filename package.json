@@ -1,0 +1,48 @@
+{
+  "name": "generator-boilerplate",
+  "version": "0.0.1",
+  "description": "Generator boilerplate project",
+  "main": "dist/plopfile.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack",
+    "plop": "plop --plopfile dist/plopfile.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jfehrman/generator-boilerplate.git"
+  },
+  "keywords": [
+    "Generator",
+    "React",
+    "Plop",
+    "JavaScript"
+  ],
+  "author": "Joe Fehrman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jfehrman/generator-boilerplate/issues"
+  },
+  "homepage": "https://github.com/jfehrman/generator-boilerplate#readme",
+  "devDependencies": {
+    "babel-jest": "^24.9.0",
+    "es6-template-string-loader": "^2.0.0",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "jest": "^24.9.0",
+    "jest-cli": "^24.9.0",
+    "jest-raw-loader": "^1.0.1",
+    "raw-loader": "^4.0.0",
+    "ts-jest": "^24.2.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "peerDependencies": {},
+  "dependencies": {
+    "app-root-path": "^3.0.0",
+    "fs": "^0.0.1-security",
+    "plop": "^2.5.3",
+    "serialize-javascript": "2.1.1"
+  }
+}
