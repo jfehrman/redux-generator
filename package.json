@@ -1,6 +1,6 @@
 {
   "name": "redux-generator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Redux Generator",
   "main": "dist/plopfile.js",
   "scripts": {
