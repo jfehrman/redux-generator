@@ -22,5 +22,6 @@ Object {
   "isSemicolons": true,
   "isStorybook": false,
   "isTypescript": false,
+  "jsExt": "js",
 }
 `;

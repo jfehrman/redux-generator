@@ -3,10 +3,29 @@
 exports[`plop action 1`] = `
 Array [
   Object {
-    "path": "hello_world.txt",
+    "path": "/home/jfehrman/redux-generator/src/redux/reducer/{{snakeCase name}}.undefined",
     "skipIfExists": false,
-    "template": "Hello {{name}}!",
+    "template": undefined,
     "type": "add",
+  },
+  Object {
+    "path": "/home/jfehrman/redux-generator/src/redux/creator/{{snakeCase name}}.undefined",
+    "skipIfExists": false,
+    "template": "",
+    "type": "add",
+  },
+  Object {
+    "path": "/home/jfehrman/redux-generator/src/redux/actions/{{snakeCase name}}.undefined",
+    "skipIfExists": false,
+    "template": "",
+    "type": "add",
+  },
+  Object {
+    "path": "/home/jfehrman/redux-generator/src/redux/reducer/{{snakeCase name}}.undefined",
+    "pattern": /;\\\\n/g,
+    "template": "
+",
+    "type": "modify",
   },
 ]
 `;
