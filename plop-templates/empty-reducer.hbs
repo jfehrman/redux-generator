@@ -1,0 +1,17 @@
+{{#isTypescript}}export interface {{snakeCase name}}State {
+
+};
+
+export interface {{snakeCase name}}Action {
+  type: string,
+};
+
+{{/isTypescript}}const DEFAULT{{#isTypescript}}: {{snakeCase name}}State{{/isTypescript}} = {};
+
+export default (state{{#isTypescript}}: {{snakeCase name}}State{{/isTypescript}} = DEFAULT, action) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
+

@@ -1,7 +1,7 @@
 {
-  "name": "generator-boilerplate",
-  "version": "0.0.1",
-  "description": "Generator boilerplate project",
+  "name": "redux-generator",
+  "version": "0.0.2",
+  "description": "Redux Generator",
   "main": "dist/plopfile.js",
   "scripts": {
     "test": "jest",
@@ -21,9 +21,9 @@
   "author": "Joe Fehrman",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jfehrman/generator-boilerplate/issues"
+    "url": "https://github.com/jfehrman/redux-generator/issues"
   },
-  "homepage": "https://github.com/jfehrman/generator-boilerplate#readme",
+  "homepage": "https://github.com/jfehrman/redux-generator#readme",
   "devDependencies": {
     "babel-jest": "^24.9.0",
     "es6-template-string-loader": "^2.0.0",
@@ -40,7 +40,10 @@
   },
   "peerDependencies": {},
   "dependencies": {
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
     "app-root-path": "^3.0.0",
+    "babel-loader": "^8.0.6",
     "fs": "^0.0.1-security",
     "plop": "^2.5.3",
     "serialize-javascript": "2.1.1"

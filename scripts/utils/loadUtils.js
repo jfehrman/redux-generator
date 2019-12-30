@@ -58,14 +58,16 @@ const loadSettings = () => {
     ...devDependencies,
     ...dependencies,
   }
+  const isTypescript = checkIsTypescript(allPackages)
   return {
-    isTypescript: checkIsTypescript(allPackages),
+    isTypescript,
     isPostcss: checkIsPostcss(allPackages),
     isStorybook: checkIsStorybook(allPackages),
     isSass: checkIsSass(allPackages),
     isJest: checkIsJestInstalled(allPackages),
     isJsx: eslintConfig && checkIsJsx(eslintConfig),
     isSemicolons: eslintConfig && checkIsSemicolon(eslintConfig),
+    jsExt: (isTypescript) ? 'ts' : 'js',
   }
 }
 
