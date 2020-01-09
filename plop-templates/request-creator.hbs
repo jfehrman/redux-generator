@@ -1,0 +1,26 @@
+import {
+  REQUEST_{{upperCase name}},
+  SUCCESS_{{upperCase name}},
+  FAILURE_{{upperCase name}},
+} from '../actions/{{snakeCase name}}';
+
+const request{{properCase name}} = () => ({
+  type: REQUEST_{{upperCase name}},
+});
+
+const success{{properCase name}} = (data{{#isTypescript}}: any{{/isTypescript}}) => ({
+  type: SUCCESS_{{upperCase name}},
+  data
+});
+
+const failure{{properCase name}} = (error{{#isTypescript}}: error{{/isTypescript}}) => ({
+  type: SUCCESS_{{upperCase name}},
+  error
+});
+
+export {
+  request{{properCase name}},
+  success{{properCase name}},
+  failure{{properCase name}},
+};
+
