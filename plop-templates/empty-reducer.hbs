@@ -2,13 +2,13 @@
 
 };
 
-export interface {{snakeCase name}}Action {
+export interface {{properCase name}}Action {
   type: string,
 };
 
-{{/isTypescript}}const DEFAULT{{#isTypescript}}: {{snakeCase name}}State{{/isTypescript}} = {};
+{{/isTypescript}}const DEFAULT{{#isTypescript}}: {{properCase name}}State{{/isTypescript}} = {};
 
-export default (state{{#isTypescript}}: {{snakeCase name}}State{{/isTypescript}} = DEFAULT, action) => {
+export default (state{{#isTypescript}}: {{properCase name}}State{{/isTypescript}} = DEFAULT, action) => {
   switch (action.type) {
     default:
       return state;
