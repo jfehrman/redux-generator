@@ -1,0 +1,18 @@
+import {
+  request{{properCase name}},
+  success{{properCase name}},
+  failure{{properCase name}},
+} from '../creators/{{snakeCase name}}';
+
+const {{camelCase name}}Thunk = () => dispatch => {
+  dispatch(request{{properCase name}}());
+  return fetch('{{url}}')
+    .then(
+      response => response.json(),
+      error => dispatch(failure{{properCase name}}()),
+    )
+    .then(json => dispatch(success{{properCase name}}(json)));
+};
+
+export default {{camelCase name}}Thunk;
+

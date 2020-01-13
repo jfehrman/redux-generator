@@ -1,0 +1,36 @@
+import {
+  request{{properCase name}},
+  success{{properCase name}},
+  failure{{properCase name}},
+} from '../actions/{{snakeCase name}}';
+
+const DEFAULT_STATE = {
+  isLoading: false,
+  data: undefined,
+  error: undefined,
+};
+
+const {{camelCase name}} = (state = DEFAULT_STATE, action) => {
+  switch(action.type) {
+    case request{{properCase name}}:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case success{{properCase name}}:
+      return {
+        ...state,
+        data: action.data,
+        isLoading: false,
+      };
+    case failure{{properCase name}}:
+      return {
+        ...state,
+        error: action.error,
+        isLoading: false,
+      };
+    default:
+      return state;
+  }
+};
+
