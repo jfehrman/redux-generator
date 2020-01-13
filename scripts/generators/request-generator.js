@@ -1,11 +1,62 @@
 const appRoot = require('app-root-path')
 const { prompt } = require('../utils/promptUtils')
+const { addAction, modifyAction } = require('../utils/actionUtils')
 const {applySettings } = require('../../plop-templates/templates')
+const {
+  requestActions,
+  requestCreators,
+  requestReducer,
+  requestThunk,
+} = require('../../plop-templates/templates')
 
 const generateRequestReducerActions = ({
-
+  isSemicolons,
+  jsExt,
 }) => {
+  let actions = [
+    addAction(
+      `${appRoot.path}/src/redux/reducer/{{snakeCase name}}.${jsExt}`,
+      requestReducer,
+    ),
+    addAction(
+      `${appRoot.path}/src/redux/actions/{{snakeCase name}}.${jsExt}`,
+      requestActions,
+    ),
+    addAction(
+      `${appRoot.path}/src/redux/creators/{{snakeCase name}}.${jsExt}`,
+      requestCreators,
+    ),
+    addAction(
+      `${appRoot.path}/src/redux/thunk-actions/{{snakeCase name}}.${jsExt}`,
+      requestThunk,
+    ),
+  ]
 
+  if (!isSemicolons) {
+    actions = [
+      ...actions,
+      modifyAction(
+        `${appRoot.path}/src/redux/reducer/{{snakeCase name}}.${jsExt}`,
+        /;\n/g,
+        '\n',
+      ),
+      modifyAction(
+        `${appRoot.path}/src/redux/actions/{{snakeCase name}}.${jsExt}`,
+        /;\n/g,
+        '\n',
+      ),
+      modifyAction(
+        `${appRoot.path}/src/redux/creators/{{snakeCase name}}.${jsExt}`,
+        /;\n/g,
+        '\n',
+      ),
+      modifyAction(
+        `${appRoot.path}/src/redux/thunk-actions/{{snakeCase name}}.${jsExt}`,
+        /;\n/g,
+        '\n',
+      ),
+    ]
+  }
 }
 
 const useRequestReducerGenerator = (plop, settings) => {
