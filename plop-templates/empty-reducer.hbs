@@ -8,7 +8,7 @@ export interface {{properCase name}}Action {
 
 {{/isTypescript}}const DEFAULT{{#isTypescript}}: {{properCase name}}State{{/isTypescript}} = {};
 
-export default (state{{#isTypescript}}: {{properCase name}}State{{/isTypescript}} = DEFAULT, action) => {
+export default (state{{#isTypescript}}: {{properCase name}}State{{/isTypescript}} = DEFAULT, action){{#isTypescript}}: {{properCase name}}State{{/isTypescript}} => {
   switch (action.type) {
     default:
       return state;
