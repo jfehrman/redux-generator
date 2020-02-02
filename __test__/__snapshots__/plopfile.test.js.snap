@@ -3,25 +3,25 @@
 exports[`plop action 1`] = `
 Array [
   Object {
-    "path": "/home/jfehrman/redux-generator/src/redux/reducer/{{snakeCase name}}.undefined",
+    "path": "/home/jfehrman/Development/redux-generator/src/redux/reducer/{{snakeCase name}}.undefined",
     "skipIfExists": false,
     "template": undefined,
     "type": "add",
   },
   Object {
-    "path": "/home/jfehrman/redux-generator/src/redux/creator/{{snakeCase name}}.undefined",
+    "path": "/home/jfehrman/Development/redux-generator/src/redux/creator/{{snakeCase name}}.undefined",
     "skipIfExists": false,
     "template": "",
     "type": "add",
   },
   Object {
-    "path": "/home/jfehrman/redux-generator/src/redux/actions/{{snakeCase name}}.undefined",
+    "path": "/home/jfehrman/Development/redux-generator/src/redux/actions/{{snakeCase name}}.undefined",
     "skipIfExists": false,
     "template": "",
     "type": "add",
   },
   Object {
-    "path": "/home/jfehrman/redux-generator/src/redux/reducer/{{snakeCase name}}.undefined",
+    "path": "/home/jfehrman/Development/redux-generator/src/redux/reducer/{{snakeCase name}}.undefined",
     "pattern": /;\\\\n/g,
     "template": "
 ",
