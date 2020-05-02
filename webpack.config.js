@@ -7,6 +7,9 @@ module.exports = {
     __dirname: true,
     __filename: true,
   },
+  optimization: {
+    minimize: false,
+  },
   context: path.resolve(__dirname),
   target: 'node',
   module: {

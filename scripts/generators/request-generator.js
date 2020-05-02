@@ -1,7 +1,7 @@
 const appRoot = require('app-root-path')
 const { prompt } = require('../utils/promptUtils')
 const { addAction, modifyAction } = require('../utils/actionUtils')
-const {applySettings } = require('../../plop-templates/templates')
+const { applySettings } = require('../utils/loadUtils')
 const {
   requestActions,
   requestCreators,
@@ -57,6 +57,8 @@ const generateRequestReducerActions = ({
       ),
     ]
   }
+
+  return actions
 }
 
 const useRequestReducerGenerator = (plop, settings) => {
@@ -77,7 +79,7 @@ const useRequestReducerGenerator = (plop, settings) => {
     actions(data) {
       applySettings(data, settings)
       return generateRequestReducerActions(data)
-    }
+    },
   })
 }
 

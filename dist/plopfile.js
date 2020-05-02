@@ -1,1 +1,653 @@
-module.exports=function(e){var n={};function t(r){if(n[r])return n[r].exports;var s=n[r]={i:r,l:!1,exports:{}};return e[r].call(s.exports,s,s.exports,t),s.l=!0,s.exports}return t.m=e,t.c=n,t.d=function(e,n,r){t.o(e,n)||Object.defineProperty(e,n,{enumerable:!0,get:r})},t.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},t.t=function(e,n){if(1&n&&(e=t(e)),8&n)return e;if(4&n&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(t.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&n&&"string"!=typeof e)for(var s in e)t.d(r,s,function(n){return e[n]}.bind(null,s));return r},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,n){return Object.prototype.hasOwnProperty.call(e,n)},t.p="",t(t.s=3)}([function(e,n,t){function r(e,n){var t=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);n&&(r=r.filter((function(n){return Object.getOwnPropertyDescriptor(e,n).enumerable}))),t.push.apply(t,r)}return t}function s(e,n,t){return n in e?Object.defineProperty(e,n,{value:t,enumerable:!0,configurable:!0,writable:!0}):e[n]=t,e}var o=t(4),a=t(1),c=function(){try{return JSON.parse(o.readFileSync("".concat(a.path,"/package.json"),"utf8"))}catch(e){throw new Error("You must have a package.json file initialized.".concat(e))}},i=function(){try{return JSON.parse(o.readFileSync("".concat(a.path,"/.eslintrc.json"),"utf8"))}catch(e){return null}},u=function(e){return Object.keys(e).some((function(e){return"typescript"===e}))},p=function(e){return Object.keys(e).some((function(e){return"postcss"===e}))},f=function(e){return Object.keys(e).some((function(e){return"@storybook/cli"===e}))},l=function(e){return Object.keys(e).some((function(e){return"node-sass"===e}))},d=function(e){return Object.keys(e).some((function(e){return"jest"===e}))},m=function(e){var n=e.rules;return Object.keys(n).some((function(e){return"react/jsx-filename-extension"===e}))&&n["react/jsx-filename-extension"][1].extensions.indexOf("jsx")>-1},y=function(e){var n=e.rules;return!Object.keys(n).some((function(e){return"semi"===e}))||Object.keys(n).some((function(e){return"semi"===e}))&&"never"!==n.semi[1]};e.exports={loadSettings:function(){var e=c(),n=i(),t=function(e){for(var n=1;n<arguments.length;n++){var t=null!=arguments[n]?arguments[n]:{};n%2?r(Object(t),!0).forEach((function(n){s(e,n,t[n])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(t)):r(Object(t)).forEach((function(n){Object.defineProperty(e,n,Object.getOwnPropertyDescriptor(t,n))}))}return e}({},e.devDependencies,{},e.dependencies),o=u(t);return{isTypescript:o,isPostcss:p(t),isStorybook:f(t),isSass:l(t),isJest:d(t),isJsx:n&&m(n),isSemicolons:n&&y(n),jsExt:o?"ts":"js"}},checkIsTypescript:u,checkIsPostcss:p,checkIsStorybook:f,checkIsSass:l,checkIsJestInstalled:d,checkIsJsx:m,checkIsSemicolon:y,loadPackages:c,loadEslint:i,applySettings:function(e,n){return Object.keys(n).forEach((function(t){e[t]=n[t]}))}}},function(e,n,t){"use strict";(function(n){var r=t(5);e.exports=r(n)}).call(this,"node_modules/app-root-path")},function(e,n){e.exports=require("path")},function(e,n,t){var r=t(0).loadSettings,s=t(9).useEmptyReducerGenerator,o=r();e.exports=function(e){s(e,o)}},function(e,n){e.exports=require("fs")},function(e,n,t){"use strict";e.exports=function(e){var n=t(2),r=t(6)(e),s={resolve:function(e){return n.join(r,e)},require:function(e){return t(8)(s.resolve(e))},toString:function(){return r},setPath:function(e){r=n.resolve(e),s.path=r},path:r};return s}},function(e,n,t){"use strict";var r,s=t(2),o=t(7).globalPaths;r="win32"===process.platform?s.dirname(process.execPath):s.dirname(s.dirname(process.execPath));var a=s.resolve(r,"lib","node_modules"),c=s.sep,i=require;const u=function(e){const n=c+"node_modules";if(-1!==e.indexOf(n)){const t=e.split(n);if(t.length)return t[0]}return null};e.exports=function(e){if(process.env.APP_ROOT_PATH)return s.resolve(process.env.APP_ROOT_PATH);if(process.versions.pnp)try{var n=i("pnpapi");return n.getPackageInformation(n.topLevel).packageLocation}catch(e){}if("undefined"!=typeof window&&window.process&&"renderer"===window.process.type)try{return i("electron").remote.require("app-root-path").path}catch(e){}if(process.env.LAMBDA_TASK_ROOT&&process.env.AWS_EXECUTION_ENV)return process.env.LAMBDA_TASK_ROOT;var t=s.resolve(e),r=!1,p=null;return function(e){const n=c+".pnpm";for(const t of o)if(-1!==t.indexOf(n)&&-1!==e.indexOf(n))return!0;return!1}(t)&&(p=u(t))?p:(o.forEach((function(e){r||0!==t.indexOf(e)||(r=!0)})),r||(p=u(t)),(r||null==p)&&(p=s.dirname(i.main.filename)),r&&-1!==p.indexOf(a)&&p.length-4===p.indexOf(c+"bin")&&(p=p.slice(0,-4)),p)}},function(e,n){e.exports=require("module")},function(e,n){function t(e){var n=new Error("Cannot find module '"+e+"'");throw n.code="MODULE_NOT_FOUND",n}t.keys=function(){return[]},t.resolve=t,e.exports=t,t.id=8},function(e,n,t){function r(e){return function(e){if(Array.isArray(e)){for(var n=0,t=new Array(e.length);n<e.length;n++)t[n]=e[n];return t}}(e)||function(e){if(Symbol.iterator in Object(e)||"[object Arguments]"===Object.prototype.toString.call(e))return Array.from(e)}(e)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance")}()}var s=t(1),o=t(10).prompt,a=t(0).applySettings,c=t(11),i=c.addAction,u=c.modifyAction,p=t(12).emptyReducer,f=function(e){var n=e.isSemicolons,t=e.jsExt,o=[i("".concat(s.path,"/src/redux/reducer/{{snakeCase name}}.").concat(t),p),i("".concat(s.path,"/src/redux/creator/{{snakeCase name}}.").concat(t),""),i("".concat(s.path,"/src/redux/actions/{{snakeCase name}}.").concat(t),"")];return n||(o=[].concat(r(o),[u("".concat(s.path,"/src/redux/reducer/{{snakeCase name}}.").concat(t),/;\n/g,"\n")])),o};e.exports={useEmptyReducerGenerator:function(e,n){e.setGenerator("empty reducer",{description:"Create an empty skeleton reducer.",prompts:[o("input","name","What is the name of the reducer?")],actions:function(e){return a(e,n),f(e)}})},generateEmptyReducerActions:f}},function(e,n){e.exports={prompt:function(e,n,t){return{type:e,name:n,message:t}}}},function(e,n){e.exports={addAction:function(e,n){var t=arguments.length>2&&void 0!==arguments[2]&&arguments[2];return{type:"add",path:e,template:n,skipIfExists:t}},modifyAction:function(e,n,t){return{type:"modify",path:e,pattern:n,template:t}}}},function(e,n,t){e.exports={emptyReducer:t(13).default,requestActions:t(14).default,requestCreator:t(15).default,requestRedcuer:t(16).default,requestThunk:t(17).default}},function(e,n,t){"use strict";t.r(n),n.default="{{#isTypescript}}export interface {{properCase name}}State {\n\n};\n\nexport interface {{properCase name}}Action {\n  type: string,\n};\n\n{{/isTypescript}}const DEFAULT{{#isTypescript}}: {{properCase name}}State{{/isTypescript}} = {};\n\nexport default (state{{#isTypescript}}: {{properCase name}}State{{/isTypescript}} = DEFAULT, action){{#isTypescript}}: {{properCase name}}State{{/isTypescript}} => {\n  switch (action.type) {\n    default:\n      return state;\n  }\n};\n\n"},function(e,n,t){"use strict";t.r(n),n.default="export {\n  REQUEST_{{upperCase name}}: 'REQUEST_{{upperCase name}}',\n  SUCCESS_{{upperCase name}}: 'SUCCESS_{{upperCase name}}',\n  FAILURE_{{upperCase name}}: 'FAILURE_{{upperCase name}}',\n};\n\n"},function(e,n,t){"use strict";t.r(n),n.default="import {\n  REQUEST_{{upperCase name}},\n  SUCCESS_{{upperCase name}},\n  FAILURE_{{upperCase name}},\n} from '../actions/{{snakeCase name}}';\n\nconst request{{properCase name}} = () => ({\n  type: REQUEST_{{upperCase name}},\n});\n\nconst success{{properCase name}} = (data{{#isTypescript}}: any{{/isTypescript}}) => ({\n  type: SUCCESS_{{upperCase name}},\n  data\n});\n\nconst failure{{properCase name}} = (error{{#isTypescript}}: error{{/isTypescript}}) => ({\n  type: SUCCESS_{{upperCase name}},\n  error\n});\n\nexport {\n  request{{properCase name}},\n  success{{properCase name}},\n  failure{{properCase name}},\n};\n\n"},function(e,n,t){"use strict";t.r(n),n.default="import {\n  request{{properCase name}},\n  success{{properCase name}},\n  failure{{properCase name}},\n} from '../actions/{{snakeCase name}}';\n\nconst DEFAULT_STATE = {\n  isLoading: false,\n  data: undefined,\n  error: undefined,\n};\n\nconst {{camelCase name}} = (state = DEFAULT_STATE, action) => {\n  switch(action.type) {\n    case request{{properCase name}}:\n      return {\n        ...state,\n        isLoading: true,\n      };\n    case success{{properCase name}}:\n      return {\n        ...state,\n        data: action.data,\n        isLoading: false,\n      };\n    case failure{{properCase name}}:\n      return {\n        ...state,\n        error: action.error,\n        isLoading: false,\n      };\n    default:\n      return state;\n  }\n};\n\n"},function(e,n,t){"use strict";t.r(n),n.default="import {\n  request{{properCase name}},\n  success{{properCase name}},\n  failure{{properCase name}},\n} from '../creators/{{snakeCase name}}';\n\nconst {{camelCase name}}Thunk = () => dispatch => {\n  dispatch(request{{properCase name}}());\n  return fetch('{{url}}')\n    .then(\n      response => response.json(),\n      error => dispatch(failure{{properCase name}}()),\n    )\n    .then(json => dispatch(success{{properCase name}}(json)));\n};\n\nexport default {{camelCase name}}Thunk;\n\n"}]);
+module.exports =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(__dirname) {
+
+var lib = __webpack_require__(8);
+module.exports = lib(__dirname);
+/* WEBPACK VAR INJECTION */}.call(this, "node_modules/app-root-path"))
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* eslint-disable global-require */
+module.exports = {
+  emptyReducer: __webpack_require__(13)["default"],
+  requestActions: __webpack_require__(14)["default"],
+  requestCreator: __webpack_require__(15)["default"],
+  requestRedcuer: __webpack_require__(16)["default"],
+  requestThunk: __webpack_require__(17)["default"]
+};
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var fs = __webpack_require__(7);
+
+var appRoot = __webpack_require__(0);
+
+var loadPackages = function loadPackages() {
+  var Package = null;
+
+  try {
+    Package = JSON.parse(fs.readFileSync("".concat(appRoot.path, "/package.json"), 'utf8'));
+    return Package;
+  } catch (e) {
+    throw new Error("You must have a package.json file initialized.".concat(e));
+  }
+};
+
+var loadEslint = function loadEslint() {
+  try {
+    return JSON.parse(fs.readFileSync("".concat(appRoot.path, "/.eslintrc.json"), 'utf8'));
+  } catch (e) {
+    return null;
+  }
+};
+
+var checkIsTypescript = function checkIsTypescript(dependencies) {
+  return Object.keys(dependencies).some(function (dependency) {
+    return dependency === 'typescript';
+  });
+};
+
+var checkIsPostcss = function checkIsPostcss(dependencies) {
+  return Object.keys(dependencies).some(function (dependency) {
+    return dependency === 'postcss';
+  });
+};
+
+var checkIsStorybook = function checkIsStorybook(dependencies) {
+  return Object.keys(dependencies).some(function (dependency) {
+    return dependency === '@storybook/cli';
+  });
+};
+
+var checkIsSass = function checkIsSass(dependencies) {
+  return Object.keys(dependencies).some(function (dependency) {
+    return dependency === 'node-sass';
+  });
+};
+
+var checkIsJestInstalled = function checkIsJestInstalled(dependencies) {
+  return Object.keys(dependencies).some(function (dependency) {
+    return dependency === 'jest';
+  });
+};
+
+var checkIsJsx = function checkIsJsx(_ref) {
+  var rules = _ref.rules;
+  return Object.keys(rules).some(function (rule) {
+    return rule === 'react/jsx-filename-extension';
+  }) && rules['react/jsx-filename-extension'][1].extensions.indexOf('jsx') > -1;
+};
+
+var checkIsSemicolon = function checkIsSemicolon(_ref2) {
+  var rules = _ref2.rules;
+
+  if (!Object.keys(rules).some(function (rule) {
+    return rule === 'semi';
+  })) {
+    return true;
+  }
+
+  return Object.keys(rules).some(function (rule) {
+    return rule === 'semi';
+  }) && rules.semi[1] !== 'never';
+};
+
+var loadSettings = function loadSettings() {
+  var pkg = loadPackages();
+  var eslintConfig = loadEslint();
+  var devDependencies = pkg.devDependencies,
+      dependencies = pkg.dependencies;
+
+  var allPackages = _objectSpread({}, devDependencies, {}, dependencies);
+
+  var isTypescript = checkIsTypescript(allPackages);
+  return {
+    isTypescript: isTypescript,
+    isPostcss: checkIsPostcss(allPackages),
+    isStorybook: checkIsStorybook(allPackages),
+    isSass: checkIsSass(allPackages),
+    isJest: checkIsJestInstalled(allPackages),
+    isJsx: eslintConfig && checkIsJsx(eslintConfig),
+    isSemicolons: eslintConfig && checkIsSemicolon(eslintConfig),
+    jsExt: isTypescript ? 'ts' : 'js'
+  };
+};
+
+var applySettings = function applySettings(data, settings) {
+  return Object.keys(settings)
+  /* eslint-disable-next-line no-param-reassign */
+  .forEach(function (prop) {
+    data[prop] = settings[prop];
+  });
+};
+
+module.exports = {
+  loadSettings: loadSettings,
+  checkIsTypescript: checkIsTypescript,
+  checkIsPostcss: checkIsPostcss,
+  checkIsStorybook: checkIsStorybook,
+  checkIsSass: checkIsSass,
+  checkIsJestInstalled: checkIsJestInstalled,
+  checkIsJsx: checkIsJsx,
+  checkIsSemicolon: checkIsSemicolon,
+  loadPackages: loadPackages,
+  loadEslint: loadEslint,
+  applySettings: applySettings
+};
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+var prompt = function prompt(type, name, message) {
+  return {
+    type: type,
+    name: name,
+    message: message
+  };
+};
+
+module.exports = {
+  prompt: prompt
+};
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+var addAction = function addAction(path, template) {
+  var skipIfExists = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  return {
+    type: 'add',
+    path: path,
+    template: template,
+    skipIfExists: skipIfExists
+  };
+};
+
+var modifyAction = function modifyAction(path, pattern, template) {
+  return {
+    type: 'modify',
+    path: path,
+    pattern: pattern,
+    template: template
+  };
+};
+
+module.exports = {
+  addAction: addAction,
+  modifyAction: modifyAction
+};
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _require = __webpack_require__(2),
+    loadSettings = _require.loadSettings;
+
+var _require2 = __webpack_require__(12),
+    useEmptyReducerGenerator = _require2.useEmptyReducerGenerator;
+
+var _require3 = __webpack_require__(18),
+    useRequestReducerGenerator = _require3.useRequestReducerGenerator;
+
+var settings = loadSettings();
+
+module.exports = function (plop) {
+  useEmptyReducerGenerator(plop, settings);
+  useRequestReducerGenerator(plop, settings);
+};
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+module.exports = require("fs");
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function(dirname) {
+	var path = __webpack_require__(3);
+	var resolve = __webpack_require__(9);
+	var appRootPath = resolve(dirname);
+
+	var publicInterface = {
+		resolve: function(pathToModule) {
+			return path.join(appRootPath, pathToModule);
+		},
+
+		require: function(pathToModule) {
+			return __webpack_require__(11)(publicInterface.resolve(pathToModule));
+		},
+
+		toString: function() {
+			return appRootPath;
+		},
+
+		setPath: function(explicitlySetPath) {
+			appRootPath = path.resolve(explicitlySetPath);
+			publicInterface.path = appRootPath;
+		},
+
+		path: appRootPath
+	};
+
+	return publicInterface;
+};
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// Dependencies
+var path = __webpack_require__(3);
+
+// Load global paths
+var globalPaths = __webpack_require__(10).globalPaths;
+
+// Guess at NPM's global install dir
+var npmGlobalPrefix;
+if ('win32' === process.platform) {
+	npmGlobalPrefix = path.dirname(process.execPath);
+} else {
+	npmGlobalPrefix = path.dirname(path.dirname(process.execPath));
+}
+var npmGlobalModuleDir = path.resolve(npmGlobalPrefix, 'lib', 'node_modules');
+
+// Save OS-specific path separator
+var sep = path.sep;
+
+// If we're in webpack, force it to use the original require() method
+var requireFunction = ( true)
+	? require
+	: undefined;
+
+const isInstalledWithPNPM = function(resolved) {
+	const pnpmDir = sep + '.pnpm';
+
+	for (const globalPath of globalPaths) {
+		if (-1 !== globalPath.indexOf(pnpmDir) && -1 !== resolved.indexOf(pnpmDir)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+const getFirstPartFromNodeModules = function(resolved) {
+	const nodeModulesDir = sep + 'node_modules';
+
+	if (-1 !== resolved.indexOf(nodeModulesDir)) {
+		const parts = resolved.split(nodeModulesDir);
+		if (parts.length) {
+			return parts[0];
+		}
+	}
+
+	return null;
+}
+
+// Resolver
+module.exports = function resolve(dirname) {
+	// Check for environmental variable
+	if (process.env.APP_ROOT_PATH) {
+		return path.resolve(process.env.APP_ROOT_PATH);
+	}
+
+	// Defer to Yarn Plug'n'Play if enabled
+	if (process.versions.pnp) {
+		try {
+			var pnp = requireFunction('pnpapi');
+			return pnp.getPackageInformation(pnp.topLevel).packageLocation;
+		} catch (e) {}
+	}
+
+	// Defer to main process in electron renderer
+	if ('undefined' !== typeof window && window.process && 'renderer' === window.process.type) {
+		try {
+			var remote = requireFunction('electron').remote;
+			return remote.require('app-root-path').path;
+		} catch (e) {}
+	}
+
+	// Defer to AWS Lambda when executing there
+	if (process.env.LAMBDA_TASK_ROOT && process.env.AWS_EXECUTION_ENV) {
+		return process.env.LAMBDA_TASK_ROOT;
+	}
+
+	var resolved = path.resolve(dirname);
+	var alternateMethod = false;
+	var appRootPath = null;
+
+	// Check if the globalPaths contain some folders with '.pnpm' in the path
+	// If yes this means it is most likely installed with pnpm
+	if (isInstalledWithPNPM(resolved)) {
+		appRootPath = getFirstPartFromNodeModules(resolved);
+
+		if (appRootPath) {
+			return appRootPath;
+		}
+	}
+
+	// Make sure that we're not loaded from a global include path
+	// Eg. $HOME/.node_modules
+	//     $HOME/.node_libraries
+	//     $PREFIX/lib/node
+	globalPaths.forEach(function(globalPath) {
+		if (!alternateMethod && 0 === resolved.indexOf(globalPath)) {
+			alternateMethod = true;
+		}
+	});
+
+	// If the app-root-path library isn't loaded globally,
+	// and node_modules exists in the path, just split __dirname
+	if (!alternateMethod) {
+		appRootPath = getFirstPartFromNodeModules(resolved);
+	}
+
+	// If the above didn't work, or this module is loaded globally, then
+	// resort to require.main.filename (See http://nodejs.org/api/modules.html)
+	if (alternateMethod || null == appRootPath) {
+		appRootPath = path.dirname(requireFunction.main.filename);
+	}
+
+	// Handle global bin/ directory edge-case
+	if (alternateMethod && -1 !== appRootPath.indexOf(npmGlobalModuleDir) && (appRootPath.length - 4) === appRootPath.indexOf(sep + 'bin')) {
+		appRootPath = appRootPath.slice(0, -4);
+	}
+
+	// Return
+	return appRootPath;
+};
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+module.exports = require("module");
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+function webpackEmptyContext(req) {
+	var e = new Error("Cannot find module '" + req + "'");
+	e.code = 'MODULE_NOT_FOUND';
+	throw e;
+}
+webpackEmptyContext.keys = function() { return []; };
+webpackEmptyContext.resolve = webpackEmptyContext;
+module.exports = webpackEmptyContext;
+webpackEmptyContext.id = 11;
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+var appRoot = __webpack_require__(0);
+
+var _require = __webpack_require__(4),
+    prompt = _require.prompt;
+
+var _require2 = __webpack_require__(2),
+    applySettings = _require2.applySettings;
+
+var _require3 = __webpack_require__(5),
+    addAction = _require3.addAction,
+    modifyAction = _require3.modifyAction;
+
+var _require4 = __webpack_require__(1),
+    emptyReducer = _require4.emptyReducer;
+
+var generateEmptyReducerActions = function generateEmptyReducerActions(_ref) {
+  var isSemicolons = _ref.isSemicolons,
+      jsExt = _ref.jsExt;
+  var actions = [addAction("".concat(appRoot.path, "/src/redux/reducer/{{snakeCase name}}.").concat(jsExt), emptyReducer), addAction("".concat(appRoot.path, "/src/redux/creator/{{snakeCase name}}.").concat(jsExt), ''), addAction("".concat(appRoot.path, "/src/redux/actions/{{snakeCase name}}.").concat(jsExt), '')];
+
+  if (!isSemicolons) {
+    actions = [].concat(_toConsumableArray(actions), [modifyAction("".concat(appRoot.path, "/src/redux/reducer/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n')]);
+  }
+
+  return actions;
+};
+
+var useEmptyReducerGenerator = function useEmptyReducerGenerator(plop, settings) {
+  plop.setGenerator('empty reducer', {
+    description: 'Create an empty skeleton reducer.',
+    prompts: [prompt('input', 'name', 'What is the name of the reducer?')],
+    actions: function actions(data) {
+      applySettings(data, settings);
+      return generateEmptyReducerActions(data);
+    }
+  });
+};
+
+module.exports = {
+  useEmptyReducerGenerator: useEmptyReducerGenerator,
+  generateEmptyReducerActions: generateEmptyReducerActions
+};
+
+/***/ }),
+/* 13 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("{{#isTypescript}}export interface {{properCase name}}State {\n\n};\n\nexport interface {{properCase name}}Action {\n  type: string,\n};\n\n{{/isTypescript}}const DEFAULT{{#isTypescript}}: {{properCase name}}State{{/isTypescript}} = {};\n\nexport default (state{{#isTypescript}}: {{properCase name}}State{{/isTypescript}} = DEFAULT, action){{#isTypescript}}: {{properCase name}}State{{/isTypescript}} => {\n  switch (action.type) {\n    default:\n      return state;\n  }\n};\n\n");
+
+/***/ }),
+/* 14 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("export {\n  REQUEST_{{upperCase name}}: 'REQUEST_{{upperCase name}}',\n  SUCCESS_{{upperCase name}}: 'SUCCESS_{{upperCase name}}',\n  FAILURE_{{upperCase name}}: 'FAILURE_{{upperCase name}}',\n};\n\n");
+
+/***/ }),
+/* 15 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("import {\n  REQUEST_{{upperCase name}},\n  SUCCESS_{{upperCase name}},\n  FAILURE_{{upperCase name}},\n} from '../actions/{{snakeCase name}}';\n\nconst request{{properCase name}} = () => ({\n  type: REQUEST_{{upperCase name}},\n});\n\nconst success{{properCase name}} = (data{{#isTypescript}}: any{{/isTypescript}}) => ({\n  type: SUCCESS_{{upperCase name}},\n  data\n});\n\nconst failure{{properCase name}} = (error{{#isTypescript}}: error{{/isTypescript}}) => ({\n  type: SUCCESS_{{upperCase name}},\n  error\n});\n\nexport {\n  request{{properCase name}},\n  success{{properCase name}},\n  failure{{properCase name}},\n};\n\n");
+
+/***/ }),
+/* 16 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("import {\n  request{{properCase name}},\n  success{{properCase name}},\n  failure{{properCase name}},\n} from '../actions/{{snakeCase name}}';\n\nconst DEFAULT_STATE = {\n  isLoading: false,\n  data: undefined,\n  error: undefined,\n};\n\nconst {{camelCase name}} = (state = DEFAULT_STATE, action) => {\n  switch(action.type) {\n    case request{{properCase name}}:\n      return {\n        ...state,\n        isLoading: true,\n      };\n    case success{{properCase name}}:\n      return {\n        ...state,\n        data: action.data,\n        isLoading: false,\n      };\n    case failure{{properCase name}}:\n      return {\n        ...state,\n        error: action.error,\n        isLoading: false,\n      };\n    default:\n      return state;\n  }\n};\n\n");
+
+/***/ }),
+/* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("import {\n  request{{properCase name}},\n  success{{properCase name}},\n  failure{{properCase name}},\n} from '../creators/{{snakeCase name}}';\n\nconst {{camelCase name}}Thunk = () => dispatch => {\n  dispatch(request{{properCase name}}());\n  return fetch('{{url}}')\n    .then(\n      response => response.json(),\n      error => dispatch(failure{{properCase name}}()),\n    )\n    .then(json => dispatch(success{{properCase name}}(json)));\n};\n\nexport default {{camelCase name}}Thunk;\n\n");
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+var appRoot = __webpack_require__(0);
+
+var _require = __webpack_require__(4),
+    prompt = _require.prompt;
+
+var _require2 = __webpack_require__(5),
+    addAction = _require2.addAction,
+    modifyAction = _require2.modifyAction;
+
+var _require3 = __webpack_require__(2),
+    applySettings = _require3.applySettings;
+
+var _require4 = __webpack_require__(1),
+    requestActions = _require4.requestActions,
+    requestCreators = _require4.requestCreators,
+    requestReducer = _require4.requestReducer,
+    requestThunk = _require4.requestThunk;
+
+var generateRequestReducerActions = function generateRequestReducerActions(_ref) {
+  var isSemicolons = _ref.isSemicolons,
+      jsExt = _ref.jsExt;
+  var actions = [addAction("".concat(appRoot.path, "/src/redux/reducer/{{snakeCase name}}.").concat(jsExt), requestReducer), addAction("".concat(appRoot.path, "/src/redux/actions/{{snakeCase name}}.").concat(jsExt), requestActions), addAction("".concat(appRoot.path, "/src/redux/creators/{{snakeCase name}}.").concat(jsExt), requestCreators), addAction("".concat(appRoot.path, "/src/redux/thunk-actions/{{snakeCase name}}.").concat(jsExt), requestThunk)];
+
+  if (!isSemicolons) {
+    actions = [].concat(_toConsumableArray(actions), [modifyAction("".concat(appRoot.path, "/src/redux/reducer/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/actions/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/creators/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/thunk-actions/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n')]);
+  }
+
+  return actions;
+};
+
+var useRequestReducerGenerator = function useRequestReducerGenerator(plop, settings) {
+  plop.setGenerator('request reducer', {
+    description: 'Create a reducer that is designed to send an async request',
+    prompts: [prompt('input', 'name', 'What is the name of the request?'), prompt('input', 'url', 'What is the url the request should be sent to?')],
+    actions: function actions(data) {
+      applySettings(data, settings);
+      return generateRequestReducerActions(data);
+    }
+  });
+};
+
+module.exports = {
+  useRequestReducerGenerator: useRequestReducerGenerator,
+  generateRequestReducerActions: generateRequestReducerActions
+};
+
+/***/ })
+/******/ ]);

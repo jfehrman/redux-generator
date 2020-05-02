@@ -6,4 +6,3 @@ module.exports = {
   requestRedcuer: require('./request-reducer.hbs').default,
   requestThunk: require('./request-thunk.hbs').default,
 }
-
