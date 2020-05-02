@@ -1,0 +1,23 @@
+import {
+  request{{ properCase name }},
+  success{{ properCase name }},
+  failure{{ properCase name }},
+} from '../{{ snakeCase name }}';
+
+it('request{{ properCase name }} shall return an action.', () => {
+  expect(request{{ properCase name }})()).toEqual({ type: 'REQUEST_{{ upperCase name }}' });
+});
+
+it('success{{ properCase name }} shall return an action.', () => {
+  expect(success{{ properCase name }}('test')).toEqual({
+    type: 'SUCCESS_{{ upperCase name }}',
+    data: 'test',
+  });
+});
+
+it('failure{{ properCase name }} shall return an action.', () => {
+  expect(failure{{ properCase name }}('error')).toEqual({
+    type: 'FAILURE_{{ upperCase name }}',
+    error: 'error',
+  });
+});

@@ -280,11 +280,13 @@ module.exports = {
 /* eslint-disable global-require */
 module.exports = {
   emptyReducer: __webpack_require__(13)["default"],
-  requestActions: __webpack_require__(14)["default"],
-  requestCreator: __webpack_require__(15)["default"],
-  requestReducer: __webpack_require__(16)["default"],
-  requestThunk: __webpack_require__(17)["default"],
-  requestThunkTest: __webpack_require__(18)["default"]
+  emptyReducerTest: __webpack_require__(14)["default"],
+  requestActions: __webpack_require__(15)["default"],
+  requestCreator: __webpack_require__(16)["default"],
+  requestCreatorTest: __webpack_require__(17)["default"],
+  requestReducer: __webpack_require__(18)["default"],
+  requestThunk: __webpack_require__(19)["default"],
+  requestThunkTest: __webpack_require__(20)["default"]
 };
 
 /***/ }),
@@ -297,7 +299,7 @@ var _require = __webpack_require__(0),
 var _require2 = __webpack_require__(12),
     useEmptyReducerGenerator = _require2.useEmptyReducerGenerator;
 
-var _require3 = __webpack_require__(19),
+var _require3 = __webpack_require__(21),
     useRequestReducerGenerator = _require3.useRequestReducerGenerator;
 
 var settings = loadSettings();
@@ -526,15 +528,16 @@ var _require3 = __webpack_require__(4),
     modifyAction = _require3.modifyAction;
 
 var _require4 = __webpack_require__(5),
-    emptyReducer = _require4.emptyReducer;
+    emptyReducer = _require4.emptyReducer,
+    emptyReducerTest = _require4.emptyReducerTest;
 
 var generateEmptyReducerActions = function generateEmptyReducerActions(_ref) {
   var isSemicolons = _ref.isSemicolons,
       jsExt = _ref.jsExt;
-  var actions = [addAction("".concat(appRoot.path, "/src/redux/reducer/{{snakeCase name}}.").concat(jsExt), emptyReducer), addAction("".concat(appRoot.path, "/src/redux/creator/{{snakeCase name}}.").concat(jsExt), ''), addAction("".concat(appRoot.path, "/src/redux/actions/{{snakeCase name}}.").concat(jsExt), '')];
+  var actions = [addAction("".concat(appRoot.path, "/src/redux/reducer/{{snakeCase name}}.").concat(jsExt), emptyReducer), addAction("".concat(appRoot.path, "/src/redux/reducer/__test__/{{snakeCase name}}.test.").concat(jsExt), emptyReducerTest), addAction("".concat(appRoot.path, "/src/redux/creator/{{snakeCase name}}.").concat(jsExt), ''), addAction("".concat(appRoot.path, "/src/redux/actions/{{snakeCase name}}.").concat(jsExt), '')];
 
   if (!isSemicolons) {
-    actions = [].concat(_toConsumableArray(actions), [modifyAction("".concat(appRoot.path, "/src/redux/reducer/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n')]);
+    actions = [].concat(_toConsumableArray(actions), [modifyAction("".concat(appRoot.path, "/src/redux/reducer/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/reducer/__test__/{{snakeCase name}}.test.").concat(jsExt), /;\n/g, '\n')]);
   }
 
   return actions;
@@ -570,7 +573,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("export {\n  REQUEST_{{upperCase name}}: 'REQUEST_{{upperCase name}}',\n  SUCCESS_{{upperCase name}}: 'SUCCESS_{{upperCase name}}',\n  FAILURE_{{upperCase name}}: 'FAILURE_{{upperCase name}}',\n};\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("import {{ properCase name }}Reducer, { {{ properCase name }}State } from '../{{ snakeCase name }}';\n\nit('{{ properCase name }}Reducer shall return default state when an invalid action is passed.', () => {\n  const invalidAction = { type: 'Invalid' };\n  expect({{ properCase name }}Reducer({{ properCase name }}State, invalidAction)).toEqual({{ properCase name }}State);\n});\n");
 
 /***/ }),
 /* 15 */
@@ -578,7 +581,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("import {\n  REQUEST_{{upperCase name}},\n  SUCCESS_{{upperCase name}},\n  FAILURE_{{upperCase name}},\n} from '../actions/{{snakeCase name}}';\n\nconst request{{properCase name}} = () => ({\n  type: REQUEST_{{upperCase name}},\n});\n\nconst success{{properCase name}} = (data{{#isTypescript}}: any{{/isTypescript}}) => ({\n  type: SUCCESS_{{upperCase name}},\n  data\n});\n\nconst failure{{properCase name}} = (error{{#isTypescript}}: error{{/isTypescript}}) => ({\n  type: SUCCESS_{{upperCase name}},\n  error\n});\n\nexport {\n  request{{properCase name}},\n  success{{properCase name}},\n  failure{{properCase name}},\n};\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("export {\n  REQUEST_{{upperCase name}}: 'REQUEST_{{upperCase name}}',\n  SUCCESS_{{upperCase name}}: 'SUCCESS_{{upperCase name}}',\n  FAILURE_{{upperCase name}}: 'FAILURE_{{upperCase name}}',\n};\n\n");
 
 /***/ }),
 /* 16 */
@@ -586,7 +589,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("import {\n  request{{properCase name}},\n  success{{properCase name}},\n  failure{{properCase name}},\n} from '../actions/{{snakeCase name}}';\n\nconst DEFAULT_STATE = {\n  isLoading: false,\n  data: undefined,\n  error: undefined,\n};\n\nconst {{camelCase name}} = (state = DEFAULT_STATE, action) => {\n  switch(action.type) {\n    case request{{properCase name}}:\n      return {\n        ...state,\n        isLoading: true,\n      };\n    case success{{properCase name}}:\n      return {\n        ...state,\n        data: action.data,\n        isLoading: false,\n      };\n    case failure{{properCase name}}:\n      return {\n        ...state,\n        error: action.error,\n        isLoading: false,\n      };\n    default:\n      return state;\n  }\n};\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("import {\n  REQUEST_{{upperCase name}},\n  SUCCESS_{{upperCase name}},\n  FAILURE_{{upperCase name}},\n} from '../actions/{{snakeCase name}}';\n\nconst request{{properCase name}} = () => ({\n  type: REQUEST_{{upperCase name}},\n});\n\nconst success{{properCase name}} = (data{{#isTypescript}}: any{{/isTypescript}}) => ({\n  type: SUCCESS_{{upperCase name}},\n  data\n});\n\nconst failure{{properCase name}} = (error{{#isTypescript}}: error{{/isTypescript}}) => ({\n  type: SUCCESS_{{upperCase name}},\n  error\n});\n\nexport {\n  request{{properCase name}},\n  success{{properCase name}},\n  failure{{properCase name}},\n};\n\n");
 
 /***/ }),
 /* 17 */
@@ -594,7 +597,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("import {\n  request{{properCase name}},\n  success{{properCase name}},\n  failure{{properCase name}},\n} from '../creators/{{snakeCase name}}';\n\nconst {{camelCase name}}Thunk = () => dispatch => {\n  dispatch(request{{properCase name}}());\n  return fetch('{{url}}')\n    .then(\n      response => response.json(),\n      error => dispatch(failure{{properCase name}}()),\n    )\n    .then(json => dispatch(success{{properCase name}}(json)));\n};\n\nexport default {{camelCase name}}Thunk;\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("import {\n  request{{ properCase name }},\n  success{{ properCase name }},\n  failure{{ properCase name }},\n} from '../{{ snakeCase name }}';\n\nit('request{{ properCase name }} shall return an action.', () => {\n  expect(request{{ properCase name }})()).toEqual({ type: 'REQUEST_{{ upperCase name }}' });\n});\n\nit('success{{ properCase name }} shall return an action.', () => {\n  expect(success{{ properCase name }}('test')).toEqual({\n    type: 'SUCCESS_{{ upperCase name }}',\n    data: 'test',\n  });\n});\n\nit('failure{{ properCase name }} shall return an action.', () => {\n  expect(failure{{ properCase name }}('error')).toEqual({\n    type: 'FAILURE_{{ upperCase name }}',\n    error: 'error',\n  });\n});\n");
 
 /***/ }),
 /* 18 */
@@ -602,10 +605,26 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("import {{ camelCase name }}Thunk from '../{{ snakeCase name }}';\n\n// TODO replace mock value with realistic return.\nconst mockValue = 'hello world';\nconst mockError = 'Failure';\nconst doNothing = jest.fn(() => null);\njest.spyOn(global, 'fetch').mockImplementationOnce(() => new Promise((resolve) => {\n  resolve({ json: () => mockValue });\n}));\n\njest.spyOn(global, 'fetch').mockImplementationOnce(() => new Promise((_resolve, reject) => {\n  reject(mockError);\n}));\n\njest.mock('../../creators/{{ snakeCase name }}', () => ({\n  request{{ properCase name }}: jest.fn(doNothing),\n  success{{ properCase name }}: jest.fn(doNothing),\n  failure{{ properCase name }}: jest.fn(doNothing),\n}));\n\nit('{{ camelCase name }}Thunk shall successfully execute when fetch resovles.', () => {\n  expect({{ camelCase name }}Thunk());\n  expect(doNothing).toBeCalledWith({\n    type: 'REQUEST_{{ upperCase name }}',\n    data: mockValue,\n  });\n});\n\nit('{{ camelCase name }}Thunk shall successfully execute when fetch resovles.', () => {\n  expect({{ camelCase name }}Thunk());\n  expect(doNothing).toBeCalledWith({\n    type: 'REQUEST_{{ upperCase name }}',\n    error: mockError,\n  });\n});\n");
+/* harmony default export */ __webpack_exports__["default"] = ("import {\n  request{{properCase name}},\n  success{{properCase name}},\n  failure{{properCase name}},\n} from '../actions/{{snakeCase name}}';\n\nconst DEFAULT_STATE = {\n  isLoading: false,\n  data: undefined,\n  error: undefined,\n};\n\nconst {{camelCase name}} = (state = DEFAULT_STATE, action) => {\n  switch(action.type) {\n    case request{{properCase name}}:\n      return {\n        ...state,\n        isLoading: true,\n      };\n    case success{{properCase name}}:\n      return {\n        ...state,\n        data: action.data,\n        isLoading: false,\n      };\n    case failure{{properCase name}}:\n      return {\n        ...state,\n        error: action.error,\n        isLoading: false,\n      };\n    default:\n      return state;\n  }\n};\n\n");
 
 /***/ }),
 /* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("import {\n  request{{properCase name}},\n  success{{properCase name}},\n  failure{{properCase name}},\n} from '../creators/{{snakeCase name}}';\n\nconst {{camelCase name}}Thunk = () => dispatch => {\n  dispatch(request{{properCase name}}());\n  return fetch('{{url}}')\n    .then(\n      response => response.json(),\n      error => dispatch(failure{{properCase name}}()),\n    )\n    .then(json => dispatch(success{{properCase name}}(json)));\n};\n\nexport default {{camelCase name}}Thunk;\n\n");
+
+/***/ }),
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("import {{ camelCase name }}Thunk from '../{{ snakeCase name }}';\n\n// TODO replace mock value with realistic return.\nconst mockValue = 'hello world';\nconst mockError = 'Failure';\nconst doNothing = jest.fn(() => null);\njest.spyOn(global, 'fetch').mockImplementationOnce(() => new Promise((resolve) => {\n  resolve({ json: () => mockValue });\n}));\n\njest.spyOn(global, 'fetch').mockImplementationOnce(() => new Promise((_resolve, reject) => {\n  reject(mockError);\n}));\n\njest.mock('../../creators/{{ snakeCase name }}', () => ({\n  request{{ properCase name }}: jest.fn(doNothing),\n  success{{ properCase name }}: jest.fn(doNothing),\n  failure{{ properCase name }}: jest.fn(doNothing),\n}));\n\nit('{{ camelCase name }}Thunk shall successfully execute when fetch resovles.', () => {\n  expect({{ camelCase name }}Thunk());\n  expect(doNothing).toBeCalledWith({\n    type: 'REQUEST_{{ upperCase name }}',\n    data: mockValue,\n  });\n});\n\nit('{{ camelCase name }}Thunk shall successfully execute when fetch resovles.', () => {\n  expect({{ camelCase name }}Thunk());\n  expect(doNothing).toBeCalledWith({\n    type: 'REQUEST_{{ upperCase name }}',\n    error: mockError,\n  });\n});\n");
+
+/***/ }),
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -634,7 +653,8 @@ var _require3 = __webpack_require__(0),
 
 var _require4 = __webpack_require__(5),
     requestActions = _require4.requestActions,
-    requestCreators = _require4.requestCreators,
+    requestCreator = _require4.requestCreator,
+    requestCreatorTest = _require4.requestCreatorTest,
     requestReducer = _require4.requestReducer,
     requestThunk = _require4.requestThunk,
     requestThunkTest = _require4.requestThunkTest;
@@ -642,10 +662,10 @@ var _require4 = __webpack_require__(5),
 var generateRequestReducerActions = function generateRequestReducerActions(_ref) {
   var isSemicolons = _ref.isSemicolons,
       jsExt = _ref.jsExt;
-  var actions = [addAction("".concat(appRoot.path, "/src/redux/reducer/{{snakeCase name}}.").concat(jsExt), requestReducer), addAction("".concat(appRoot.path, "/src/redux/actions/{{snakeCase name}}.").concat(jsExt), requestActions), addAction("".concat(appRoot.path, "/src/redux/creators/{{snakeCase name}}.").concat(jsExt), requestCreators), addAction("".concat(appRoot.path, "/src/redux/thunk-actions/{{snakeCase name}}.").concat(jsExt), requestThunk), addAction("".concat(appRoot.path, "/src/redux/thunk-actions/__test__/{{snakeCase name}}.test.").concat(jsExt), requestThunkTest)];
+  var actions = [addAction("".concat(appRoot.path, "/src/redux/reducer/{{snakeCase name}}.").concat(jsExt), requestReducer), addAction("".concat(appRoot.path, "/src/redux/actions/{{snakeCase name}}.").concat(jsExt), requestActions), addAction("".concat(appRoot.path, "/src/redux/creators/{{snakeCase name}}.").concat(jsExt), requestCreator), addAction("".concat(appRoot.path, "/src/redux/creators/__test__/{{snakeCase name}}.test.").concat(jsExt), requestCreatorTest), addAction("".concat(appRoot.path, "/src/redux/thunk-actions/{{snakeCase name}}.").concat(jsExt), requestThunk), addAction("".concat(appRoot.path, "/src/redux/thunk-actions/__test__/{{snakeCase name}}.test.").concat(jsExt), requestThunkTest)];
 
   if (!isSemicolons) {
-    actions = [].concat(_toConsumableArray(actions), [modifyAction("".concat(appRoot.path, "/src/redux/reducer/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/actions/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/creators/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/thunk-actions/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/thunk-actions/__test__/{{snakeCase name}}.test.").concat(jsExt), /;\n/g, '\n')]);
+    actions = [].concat(_toConsumableArray(actions), [modifyAction("".concat(appRoot.path, "/src/redux/reducer/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/actions/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/creators/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/creators/__test__/{{snakeCase name}}.test.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/thunk-actions/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/thunk-actions/__test__/{{snakeCase name}}.test.").concat(jsExt), /;\n/g, '\n')]);
   }
 
   return actions;

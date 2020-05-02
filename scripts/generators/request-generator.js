@@ -4,7 +4,8 @@ const { addAction, modifyAction } = require('../utils/actionUtils')
 const { applySettings } = require('../utils/loadUtils')
 const {
   requestActions,
-  requestCreators,
+  requestCreator,
+  requestCreatorTest,
   requestReducer,
   requestThunk,
   requestThunkTest,
@@ -25,7 +26,11 @@ const generateRequestReducerActions = ({
     ),
     addAction(
       `${appRoot.path}/src/redux/creators/{{snakeCase name}}.${jsExt}`,
-      requestCreators,
+      requestCreator,
+    ),
+    addAction(
+      `${appRoot.path}/src/redux/creators/__test__/{{snakeCase name}}.test.${jsExt}`,
+      requestCreatorTest,
     ),
     addAction(
       `${appRoot.path}/src/redux/thunk-actions/{{snakeCase name}}.${jsExt}`,
@@ -52,6 +57,11 @@ const generateRequestReducerActions = ({
       ),
       modifyAction(
         `${appRoot.path}/src/redux/creators/{{snakeCase name}}.${jsExt}`,
+        /;\n/g,
+        '\n',
+      ),
+      modifyAction(
+        `${appRoot.path}/src/redux/creators/__test__/{{snakeCase name}}.test.${jsExt}`,
         /;\n/g,
         '\n',
       ),
