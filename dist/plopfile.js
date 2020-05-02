@@ -89,30 +89,6 @@ module.exports =
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-/* WEBPACK VAR INJECTION */(function(__dirname) {
-
-var lib = __webpack_require__(8);
-module.exports = lib(__dirname);
-/* WEBPACK VAR INJECTION */}.call(this, "node_modules/app-root-path"))
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* eslint-disable global-require */
-module.exports = {
-  emptyReducer: __webpack_require__(13)["default"],
-  requestActions: __webpack_require__(14)["default"],
-  requestCreator: __webpack_require__(15)["default"],
-  requestRedcuer: __webpack_require__(16)["default"],
-  requestThunk: __webpack_require__(17)["default"]
-};
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -121,7 +97,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var fs = __webpack_require__(7);
 
-var appRoot = __webpack_require__(0);
+var appRoot = __webpack_require__(1);
 
 var loadPackages = function loadPackages() {
   var Package = null;
@@ -199,7 +175,7 @@ var loadSettings = function loadSettings() {
   var devDependencies = pkg.devDependencies,
       dependencies = pkg.dependencies;
 
-  var allPackages = _objectSpread({}, devDependencies, {}, dependencies);
+  var allPackages = _objectSpread(_objectSpread({}, devDependencies), dependencies);
 
   var isTypescript = checkIsTypescript(allPackages);
   return {
@@ -237,13 +213,24 @@ module.exports = {
 };
 
 /***/ }),
-/* 3 */
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(__dirname) {
+
+var lib = __webpack_require__(8);
+module.exports = lib(__dirname);
+/* WEBPACK VAR INJECTION */}.call(this, "node_modules/app-root-path"))
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports) {
 
 module.exports = require("path");
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports) {
 
 var prompt = function prompt(type, name, message) {
@@ -259,7 +246,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports) {
 
 var addAction = function addAction(path, template) {
@@ -287,16 +274,30 @@ module.exports = {
 };
 
 /***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* eslint-disable global-require */
+module.exports = {
+  emptyReducer: __webpack_require__(13)["default"],
+  requestActions: __webpack_require__(14)["default"],
+  requestCreator: __webpack_require__(15)["default"],
+  requestReducer: __webpack_require__(16)["default"],
+  requestThunk: __webpack_require__(17)["default"],
+  requestThunkTest: __webpack_require__(18)["default"]
+};
+
+/***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _require = __webpack_require__(2),
+var _require = __webpack_require__(0),
     loadSettings = _require.loadSettings;
 
 var _require2 = __webpack_require__(12),
     useEmptyReducerGenerator = _require2.useEmptyReducerGenerator;
 
-var _require3 = __webpack_require__(18),
+var _require3 = __webpack_require__(19),
     useRequestReducerGenerator = _require3.useRequestReducerGenerator;
 
 var settings = loadSettings();
@@ -320,7 +321,7 @@ module.exports = require("fs");
 
 
 module.exports = function(dirname) {
-	var path = __webpack_require__(3);
+	var path = __webpack_require__(2);
 	var resolve = __webpack_require__(9);
 	var appRootPath = resolve(dirname);
 
@@ -356,7 +357,7 @@ module.exports = function(dirname) {
 
 
 // Dependencies
-var path = __webpack_require__(3);
+var path = __webpack_require__(2);
 
 // Load global paths
 var globalPaths = __webpack_require__(10).globalPaths;
@@ -500,27 +501,31 @@ webpackEmptyContext.id = 11;
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
 
-var appRoot = __webpack_require__(0);
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
-var _require = __webpack_require__(4),
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var appRoot = __webpack_require__(1);
+
+var _require = __webpack_require__(3),
     prompt = _require.prompt;
 
-var _require2 = __webpack_require__(2),
+var _require2 = __webpack_require__(0),
     applySettings = _require2.applySettings;
 
-var _require3 = __webpack_require__(5),
+var _require3 = __webpack_require__(4),
     addAction = _require3.addAction,
     modifyAction = _require3.modifyAction;
 
-var _require4 = __webpack_require__(1),
+var _require4 = __webpack_require__(5),
     emptyReducer = _require4.emptyReducer;
 
 var generateEmptyReducerActions = function generateEmptyReducerActions(_ref) {
@@ -593,41 +598,54 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 /* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("import {{ camelCase name }}Thunk from '../{{ snakeCase name }}';\n\n// TODO replace mock value with realistic return.\nconst mockValue = 'hello world';\nconst mockError = 'Failure';\nconst doNothing = jest.fn(() => null);\njest.spyOn(global, 'fetch').mockImplementationOnce(() => new Promise((resolve) => {\n  resolve({ json: () => mockValue });\n}));\n\njest.spyOn(global, 'fetch').mockImplementationOnce(() => new Promise((_resolve, reject) => {\n  reject(mockError);\n}));\n\njest.mock('../../creators/{{ snakeCase name }}', () => ({\n  request{{ properCase name }}: jest.fn(doNothing),\n  success{{ properCase name }}: jest.fn(doNothing),\n  failure{{ properCase name }}: jest.fn(doNothing),\n}));\n\nit('{{ camelCase name }}Thunk shall successfully execute when fetch resovles.', () => {\n  expect({{ camelCase name }}Thunk());\n  expect(doNothing).toBeCalledWith({\n    type: 'REQUEST_{{ upperCase name }}',\n    data: mockValue,\n  });\n});\n\nit('{{ camelCase name }}Thunk shall successfully execute when fetch resovles.', () => {\n  expect({{ camelCase name }}Thunk());\n  expect(doNothing).toBeCalledWith({\n    type: 'REQUEST_{{ upperCase name }}',\n    error: mockError,\n  });\n});\n");
+
+/***/ }),
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
 
-var appRoot = __webpack_require__(0);
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
-var _require = __webpack_require__(4),
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var appRoot = __webpack_require__(1);
+
+var _require = __webpack_require__(3),
     prompt = _require.prompt;
 
-var _require2 = __webpack_require__(5),
+var _require2 = __webpack_require__(4),
     addAction = _require2.addAction,
     modifyAction = _require2.modifyAction;
 
-var _require3 = __webpack_require__(2),
+var _require3 = __webpack_require__(0),
     applySettings = _require3.applySettings;
 
-var _require4 = __webpack_require__(1),
+var _require4 = __webpack_require__(5),
     requestActions = _require4.requestActions,
     requestCreators = _require4.requestCreators,
     requestReducer = _require4.requestReducer,
-    requestThunk = _require4.requestThunk;
+    requestThunk = _require4.requestThunk,
+    requestThunkTest = _require4.requestThunkTest;
 
 var generateRequestReducerActions = function generateRequestReducerActions(_ref) {
   var isSemicolons = _ref.isSemicolons,
       jsExt = _ref.jsExt;
-  var actions = [addAction("".concat(appRoot.path, "/src/redux/reducer/{{snakeCase name}}.").concat(jsExt), requestReducer), addAction("".concat(appRoot.path, "/src/redux/actions/{{snakeCase name}}.").concat(jsExt), requestActions), addAction("".concat(appRoot.path, "/src/redux/creators/{{snakeCase name}}.").concat(jsExt), requestCreators), addAction("".concat(appRoot.path, "/src/redux/thunk-actions/{{snakeCase name}}.").concat(jsExt), requestThunk)];
+  var actions = [addAction("".concat(appRoot.path, "/src/redux/reducer/{{snakeCase name}}.").concat(jsExt), requestReducer), addAction("".concat(appRoot.path, "/src/redux/actions/{{snakeCase name}}.").concat(jsExt), requestActions), addAction("".concat(appRoot.path, "/src/redux/creators/{{snakeCase name}}.").concat(jsExt), requestCreators), addAction("".concat(appRoot.path, "/src/redux/thunk-actions/{{snakeCase name}}.").concat(jsExt), requestThunk), addAction("".concat(appRoot.path, "/src/redux/thunk-actions/__test__/{{snakeCase name}}.test.").concat(jsExt), requestThunkTest)];
 
   if (!isSemicolons) {
-    actions = [].concat(_toConsumableArray(actions), [modifyAction("".concat(appRoot.path, "/src/redux/reducer/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/actions/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/creators/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/thunk-actions/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n')]);
+    actions = [].concat(_toConsumableArray(actions), [modifyAction("".concat(appRoot.path, "/src/redux/reducer/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/actions/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/creators/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/thunk-actions/{{snakeCase name}}.").concat(jsExt), /;\n/g, '\n'), modifyAction("".concat(appRoot.path, "/src/redux/thunk-actions/__test__/{{snakeCase name}}.test.").concat(jsExt), /;\n/g, '\n')]);
   }
 
   return actions;

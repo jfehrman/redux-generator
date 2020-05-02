@@ -7,6 +7,7 @@ const {
   requestCreators,
   requestReducer,
   requestThunk,
+  requestThunkTest,
 } = require('../../plop-templates/templates')
 
 const generateRequestReducerActions = ({
@@ -30,6 +31,10 @@ const generateRequestReducerActions = ({
       `${appRoot.path}/src/redux/thunk-actions/{{snakeCase name}}.${jsExt}`,
       requestThunk,
     ),
+    addAction(
+      `${appRoot.path}/src/redux/thunk-actions/__test__/{{snakeCase name}}.test.${jsExt}`,
+      requestThunkTest,
+    ),
   ]
 
   if (!isSemicolons) {
@@ -52,6 +57,11 @@ const generateRequestReducerActions = ({
       ),
       modifyAction(
         `${appRoot.path}/src/redux/thunk-actions/{{snakeCase name}}.${jsExt}`,
+        /;\n/g,
+        '\n',
+      ),
+      modifyAction(
+        `${appRoot.path}/src/redux/thunk-actions/__test__/{{snakeCase name}}.test.${jsExt}`,
         /;\n/g,
         '\n',
       ),

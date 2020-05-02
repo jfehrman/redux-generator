@@ -1,0 +1,35 @@
+import {{ camelCase name }}Thunk from '../{{ snakeCase name }}';
+
+// TODO replace mock value with realistic return.
+const mockValue = 'hello world';
+const mockError = 'Failure';
+const doNothing = jest.fn(() => null);
+jest.spyOn(global, 'fetch').mockImplementationOnce(() => new Promise((resolve) => {
+  resolve({ json: () => mockValue });
+}));
+
+jest.spyOn(global, 'fetch').mockImplementationOnce(() => new Promise((_resolve, reject) => {
+  reject(mockError);
+}));
+
+jest.mock('../../creators/{{ snakeCase name }}', () => ({
+  request{{ properCase name }}: jest.fn(doNothing),
+  success{{ properCase name }}: jest.fn(doNothing),
+  failure{{ properCase name }}: jest.fn(doNothing),
+}));
+
+it('{{ camelCase name }}Thunk shall successfully execute when fetch resovles.', () => {
+  expect({{ camelCase name }}Thunk());
+  expect(doNothing).toBeCalledWith({
+    type: 'REQUEST_{{ upperCase name }}',
+    data: mockValue,
+  });
+});
+
+it('{{ camelCase name }}Thunk shall successfully execute when fetch resovles.', () => {
+  expect({{ camelCase name }}Thunk());
+  expect(doNothing).toBeCalledWith({
+    type: 'REQUEST_{{ upperCase name }}',
+    error: mockError,
+  });
+});
