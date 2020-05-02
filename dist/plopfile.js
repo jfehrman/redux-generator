@@ -565,7 +565,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("{{#isTypescript}}export interface {{properCase name}}State {\n\n};\n\nexport interface {{properCase name}}Action {\n  type: string,\n};\n\n{{/isTypescript}}const DEFAULT{{#isTypescript}}: {{properCase name}}State{{/isTypescript}} = {};\n\nexport default (state{{#isTypescript}}: {{properCase name}}State{{/isTypescript}} = DEFAULT, action){{#isTypescript}}: {{properCase name}}State{{/isTypescript}} => {\n  switch (action.type) {\n    default:\n      return state;\n  }\n};\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("{{#isTypescript}}export interface {{properCase name}}State {\n\n};\n\nexport interface {{properCase name}}Action {\n  type: string,\n};\n\n{{/isTypescript}}const DEFAULT{{#isTypescript}}: {{properCase name}}State{{/isTypescript}} = {};\n\nexport default (state{{#isTypescript}}: {{properCase name}}State{{/isTypescript}} = DEFAULT, action){{#isTypescript}}: {{properCase name}}State{{/isTypescript}} => {\n  switch (action.type) {\n    default:\n      return state;\n  }\n};\n");
 
 /***/ }),
 /* 14 */
