@@ -573,7 +573,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("import {{ properCase name }}Reducer, { {{ properCase name }}State } from '../{{ snakeCase name }}';\n\nit('{{ properCase name }}Reducer shall return default state when an invalid action is passed.', () => {\n  const invalidAction = { type: 'Invalid' };\n  expect({{ properCase name }}Reducer({{ properCase name }}State, invalidAction)).toEqual({{ properCase name }}State);\n});\n");
+/* harmony default export */ __webpack_exports__["default"] = ("import {{ properCase name }}Reducer from '../{{ snakeCase name }}';\n\nit('{{ properCase name }}Reducer shall return default state when an invalid action is passed.', () => {\n  const invalidAction = { type: 'Invalid' };\n  expect({{ properCase name }}Reducer({}, invalidAction)).toEqual({});\n});\n");
 
 /***/ }),
 /* 15 */
@@ -581,7 +581,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("export {\n  REQUEST_{{upperCase name}}: 'REQUEST_{{upperCase name}}',\n  SUCCESS_{{upperCase name}}: 'SUCCESS_{{upperCase name}}',\n  FAILURE_{{upperCase name}}: 'FAILURE_{{upperCase name}}',\n};\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("export const REQUEST_{{upperCase name}} = 'REQUEST_{{upperCase name}}';\nexport const SUCCESS_{{upperCase name}} = 'SUCCESS_{{upperCase name}}';\nexport const FAILURE_{{upperCase name}} = 'FAILURE_{{upperCase name}}';\n");
 
 /***/ }),
 /* 16 */
@@ -589,7 +589,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("import {\n  REQUEST_{{upperCase name}},\n  SUCCESS_{{upperCase name}},\n  FAILURE_{{upperCase name}},\n} from '../actions/{{snakeCase name}}';\n\nconst request{{properCase name}} = () => ({\n  type: REQUEST_{{upperCase name}},\n});\n\nconst success{{properCase name}} = (data{{#isTypescript}}: any{{/isTypescript}}) => ({\n  type: SUCCESS_{{upperCase name}},\n  data\n});\n\nconst failure{{properCase name}} = (error{{#isTypescript}}: error{{/isTypescript}}) => ({\n  type: SUCCESS_{{upperCase name}},\n  error\n});\n\nexport {\n  request{{properCase name}},\n  success{{properCase name}},\n  failure{{properCase name}},\n};\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("import {\n  REQUEST_{{upperCase name}},\n  SUCCESS_{{upperCase name}},\n  FAILURE_{{upperCase name}},\n} from '../actions/{{snakeCase name}}';\n\nconst request{{properCase name}} = () => ({\n  type: REQUEST_{{upperCase name}},\n});\n\nconst success{{properCase name}} = (data{{#isTypescript}}: any{{/isTypescript}}) => ({\n  type: SUCCESS_{{upperCase name}},\n  data,\n});\n\nconst failure{{properCase name}} = (error{{#isTypescript}}: Error{{/isTypescript}}) => ({\n  type: FAILURE_{{upperCase name}},\n  error,\n});\n\nexport {\n  request{{properCase name}},\n  success{{properCase name}},\n  failure{{properCase name}},\n};\n\n");
 
 /***/ }),
 /* 17 */
@@ -597,7 +597,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("import {\n  request{{ properCase name }},\n  success{{ properCase name }},\n  failure{{ properCase name }},\n} from '../{{ snakeCase name }}';\n\nit('request{{ properCase name }} shall return an action.', () => {\n  expect(request{{ properCase name }})()).toEqual({ type: 'REQUEST_{{ upperCase name }}' });\n});\n\nit('success{{ properCase name }} shall return an action.', () => {\n  expect(success{{ properCase name }}('test')).toEqual({\n    type: 'SUCCESS_{{ upperCase name }}',\n    data: 'test',\n  });\n});\n\nit('failure{{ properCase name }} shall return an action.', () => {\n  expect(failure{{ properCase name }}('error')).toEqual({\n    type: 'FAILURE_{{ upperCase name }}',\n    error: 'error',\n  });\n});\n");
+/* harmony default export */ __webpack_exports__["default"] = ("import {\n  request{{ properCase name }},\n  success{{ properCase name }},\n  failure{{ properCase name }},\n} from '../{{ snakeCase name }}';\n\nit('request{{ properCase name }} shall return an action.', () => {\n  expect(request{{ properCase name }}()).toEqual({ type: 'REQUEST_{{ upperCase name }}' });\n});\n\nit('success{{ properCase name }} shall return an action.', () => {\n  expect(success{{ properCase name }}('test')).toEqual({\n    type: 'SUCCESS_{{ upperCase name }}',\n    data: 'test',\n  });\n});\n\nit('failure{{ properCase name }} shall return an action.', () => {\n  expect(failure{{ properCase name }}('error')).toEqual({\n    type: 'FAILURE_{{ upperCase name }}',\n    error: 'error',\n  });\n});\n");
 
 /***/ }),
 /* 18 */
@@ -613,7 +613,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("import {\n  request{{properCase name}},\n  success{{properCase name}},\n  failure{{properCase name}},\n} from '../creators/{{snakeCase name}}';\n\nconst {{camelCase name}}Thunk = () => dispatch => {\n  dispatch(request{{properCase name}}());\n  return fetch('{{url}}')\n    .then(\n      response => response.json(),\n      error => dispatch(failure{{properCase name}}()),\n    )\n    .then(json => dispatch(success{{properCase name}}(json)));\n};\n\nexport default {{camelCase name}}Thunk;\n\n");
+/* harmony default export */ __webpack_exports__["default"] = ("import {\n  request{{properCase name}},\n  success{{properCase name}},\n  failure{{properCase name}},\n} from '../creators/{{snakeCase name}}';\n\nconst {{camelCase name}}Thunk = () => dispatch => {\n  dispatch(request{{properCase name}}());\n  return fetch('{{url}}')\n    .then(\n      (response) => response.json(),\n      (error) => dispatch(failure{{properCase name}}(error)),\n    )\n    .then(json => dispatch(success{{properCase name}}(json)));\n};\n\nexport default {{camelCase name}}Thunk;\n\n");
 
 /***/ }),
 /* 20 */
@@ -621,7 +621,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("import {{ camelCase name }}Thunk from '../{{ snakeCase name }}';\n\n// TODO replace mock value with realistic return.\nconst mockValue = 'hello world';\nconst mockError = 'Failure';\nconst doNothing = jest.fn(() => null);\njest.spyOn(global, 'fetch').mockImplementationOnce(() => new Promise((resolve) => {\n  resolve({ json: () => mockValue });\n}));\n\njest.spyOn(global, 'fetch').mockImplementationOnce(() => new Promise((_resolve, reject) => {\n  reject(mockError);\n}));\n\njest.mock('../../creators/{{ snakeCase name }}', () => ({\n  request{{ properCase name }}: jest.fn(doNothing),\n  success{{ properCase name }}: jest.fn(doNothing),\n  failure{{ properCase name }}: jest.fn(doNothing),\n}));\n\nit('{{ camelCase name }}Thunk shall successfully execute when fetch resovles.', () => {\n  expect({{ camelCase name }}Thunk());\n  expect(doNothing).toBeCalledWith({\n    type: 'REQUEST_{{ upperCase name }}',\n    data: mockValue,\n  });\n});\n\nit('{{ camelCase name }}Thunk shall successfully execute when fetch resovles.', () => {\n  expect({{ camelCase name }}Thunk());\n  expect(doNothing).toBeCalledWith({\n    type: 'REQUEST_{{ upperCase name }}',\n    error: mockError,\n  });\n});\n");
+/* harmony default export */ __webpack_exports__["default"] = ("import {{ camelCase name }}Thunk from '../{{ snakeCase name }}';\n\n// TODO replace mock value with realistic return.\nconst mockValue = 'hello world';\nconst mockError = 'Failure';\nconst doNothing = jest.fn(() => null);\nconst fakePromise = jest.fn(() => new Promise((resolve) => {\n  resolve({ json: () => mockValue });\n}));\nglobal.fetch = fakePromise;\n\njest.mock('../../creators/{{ snakeCase name }}', () => ({\n  request{{ properCase name }}: jest.fn(doNothing),\n  success{{ properCase name }}: jest.fn(doNothing),\n  failure{{ properCase name }}: jest.fn(doNothing),\n}));\n\nit('{{ camelCase name }}Thunk shall successfully execute when fetch resovles.', () => {\n  expect.assertions(1);\n  {{ camelCase name }}Thunk()(doNothing).then(() => {\n    expect(doNothing).toBeCalledWith(mockValue);\n  });\n});\n\nit('{{ camelCase name }}Thunk shall successfully execute when fetch resovles.', () => {\n  {{ camelCase name }}Thunk()(doNothing).then(() => {\n    expect(doNothing).toBeCalledWith(mockError);\n  })\n});\n");
 
 /***/ }),
 /* 21 */

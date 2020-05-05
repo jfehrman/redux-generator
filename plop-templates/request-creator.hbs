@@ -10,12 +10,12 @@ const request{{properCase name}} = () => ({
 
 const success{{properCase name}} = (data{{#isTypescript}}: any{{/isTypescript}}) => ({
   type: SUCCESS_{{upperCase name}},
-  data
+  data,
 });
 
-const failure{{properCase name}} = (error{{#isTypescript}}: error{{/isTypescript}}) => ({
-  type: SUCCESS_{{upperCase name}},
-  error
+const failure{{properCase name}} = (error{{#isTypescript}}: Error{{/isTypescript}}) => ({
+  type: FAILURE_{{upperCase name}},
+  error,
 });
 
 export {

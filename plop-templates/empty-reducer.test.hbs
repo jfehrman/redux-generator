@@ -1,6 +1,6 @@
-import {{ properCase name }}Reducer, { {{ properCase name }}State } from '../{{ snakeCase name }}';
+import {{ properCase name }}Reducer from '../{{ snakeCase name }}';
 
 it('{{ properCase name }}Reducer shall return default state when an invalid action is passed.', () => {
   const invalidAction = { type: 'Invalid' };
-  expect({{ properCase name }}Reducer({{ properCase name }}State, invalidAction)).toEqual({{ properCase name }}State);
+  expect({{ properCase name }}Reducer({}, invalidAction)).toEqual({});
 });

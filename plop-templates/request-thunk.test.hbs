@@ -4,13 +4,10 @@ import {{ camelCase name }}Thunk from '../{{ snakeCase name }}';
 const mockValue = 'hello world';
 const mockError = 'Failure';
 const doNothing = jest.fn(() => null);
-jest.spyOn(global, 'fetch').mockImplementationOnce(() => new Promise((resolve) => {
+const fakePromise = jest.fn(() => new Promise((resolve) => {
   resolve({ json: () => mockValue });
 }));
-
-jest.spyOn(global, 'fetch').mockImplementationOnce(() => new Promise((_resolve, reject) => {
-  reject(mockError);
-}));
+global.fetch = fakePromise;
 
 jest.mock('../../creators/{{ snakeCase name }}', () => ({
   request{{ properCase name }}: jest.fn(doNothing),
@@ -19,17 +16,14 @@ jest.mock('../../creators/{{ snakeCase name }}', () => ({
 }));
 
 it('{{ camelCase name }}Thunk shall successfully execute when fetch resovles.', () => {
-  expect({{ camelCase name }}Thunk());
-  expect(doNothing).toBeCalledWith({
-    type: 'REQUEST_{{ upperCase name }}',
-    data: mockValue,
+  expect.assertions(1);
+  {{ camelCase name }}Thunk()(doNothing).then(() => {
+    expect(doNothing).toBeCalledWith(mockValue);
   });
 });
 
 it('{{ camelCase name }}Thunk shall successfully execute when fetch resovles.', () => {
-  expect({{ camelCase name }}Thunk());
-  expect(doNothing).toBeCalledWith({
-    type: 'REQUEST_{{ upperCase name }}',
-    error: mockError,
-  });
+  {{ camelCase name }}Thunk()(doNothing).then(() => {
+    expect(doNothing).toBeCalledWith(mockError);
+  })
 });

@@ -8,8 +8,8 @@ const {{camelCase name}}Thunk = () => dispatch => {
   dispatch(request{{properCase name}}());
   return fetch('{{url}}')
     .then(
-      response => response.json(),
-      error => dispatch(failure{{properCase name}}()),
+      (response) => response.json(),
+      (error) => dispatch(failure{{properCase name}}(error)),
     )
     .then(json => dispatch(success{{properCase name}}(json)));
 };
